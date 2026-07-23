@@ -1,0 +1,47 @@
+{
+    "buckets": [
+        {
+            "Name": "main",
+            "Source": "~\\scoop\\buckets\\main",
+            "Updated": "2026-07-23T21:06:29.3832244+08:00",
+            "Manifests": 1612
+        }
+    ],
+    "apps": [
+        {
+            "Updated": "2026-07-23T23:46:45.2722617+08:00",
+            "Info": "",
+            "Version": "26.02",
+            "Name": "7zip",
+            "Source": "main"
+        },
+        {
+            "Updated": "2026-07-23T21:06:57.8720551+08:00",
+            "Info": "",
+            "Version": "2.71.1",
+            "Name": "chezmoi",
+            "Source": "main"
+        },
+        {
+            "Updated": "2026-07-23T23:47:12.0089173+08:00",
+            "Info": "",
+            "Version": "2.55.0.3",
+            "Name": "git",
+            "Source": "main"
+        },
+        {
+            "Updated": "2026-07-23T23:42:37.5804332+08:00",
+            "Info": "",
+            "Version": "0.12.4",
+            "Name": "neovim",
+            "Source": "main"
+        },
+        {
+            "Updated": "2026-07-23T21:18:00.6589032+08:00",
+            "Info": "",
+            "Version": "1.26.0",
+            "Name": "starship",
+            "Source": "main"
+        }
+    ]
+}
