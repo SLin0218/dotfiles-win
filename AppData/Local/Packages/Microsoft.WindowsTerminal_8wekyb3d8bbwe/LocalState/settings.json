@@ -5,17 +5,25 @@
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{d510c7f4-dfa3-4324-af88-b36d565c3755}",
-    "disabledProfileSources": 
+    "disabledProfileSources":
     [
         "Windows.Terminal.Wsl",
         "Windows.Terminal.Azure",
         "Windows.Terminal.PowershellCore"
     ],
-    "keybindings": 
+    "keybindings":
     [
         {
+            "id": null,
+            "keys": "alt+shift+minus"
+        },
+        {
+            "id": "Terminal.MoveFocusUp",
+            "keys": "ctrl+shift+k"
+        },
+        {
             "id": "Terminal.CopyToClipboard",
-            "keys": "ctrl+c"
+            "keys": "ctrl+shift+c"
         },
         {
             "id": "Terminal.FindText",
@@ -24,30 +32,70 @@
         {
             "id": "Terminal.DuplicatePaneAuto",
             "keys": "alt+shift+d"
+        },
+        {
+            "id": "User.splitPane.D5151347",
+            "keys": "ctrl+shift+5"
+        },
+        {
+            "id": "User.splitPane.864CD510",
+            "keys": "ctrl+shift+'"
+        },
+        {
+            "id": null,
+            "keys": "alt+shift+plus"
+        },
+        {
+            "id": null,
+            "keys": "alt+up"
+        },
+        {
+            "id": "Terminal.MoveFocusDown",
+            "keys": "ctrl+shift+j"
+        },
+        {
+            "id": null,
+            "keys": "alt+down"
+        },
+        {
+            "id": "Terminal.MoveFocusRight",
+            "keys": "ctrl+shift+l"
+        },
+        {
+            "id": null,
+            "keys": "alt+right"
+        },
+        {
+            "id": "Terminal.MoveFocusLeft",
+            "keys": "ctrl+shift+h"
+        },
+        {
+            "id": null,
+            "keys": "alt+left"
         }
     ],
     "launchMode": "maximized",
-    "newTabMenu": 
+    "newTabMenu":
     [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles": 
+    "profiles":
     {
-        "defaults": 
+        "defaults":
         {
             "colorScheme": "Catppuccin Mocha",
             "cursorShape": "underscore",
 	    "adjustIndistinguishableColors": "indexed",
             "antialiasingMode": "grayscale",
-	    "bellStyle": 
+	    "bellStyle":
             [
                 "window",
                 "taskbar"
             ],
 	    "experimental.retroTerminalEffect": false,
-            "font": 
+            "font":
             {
             	"face": "JetBrainsMono Nerd Font Mono",
                 "size": 12,
@@ -58,9 +106,9 @@
             "padding": "20,20,10,0",
             "scrollbarState": "hidden",
             "useAcrylic": true
-	    
+	   
         },
-        "list": 
+        "list":
         [
 	   {
                 "commandline": "C:\\windows\\system32\\wsl.exe --distribution-id {c64a57b4-822a-40fb-b34e-b1d2c5e88878}",
@@ -81,7 +129,7 @@
             }
         ]
     },
-    "schemes": 
+    "schemes":
     [
         {
             "background": "#1E1E2E",
@@ -109,23 +157,23 @@
     ],
     "tabSwitcherMode": "disabled",
     "theme": "Catppuccin Mocha",
-    "themes": 
+    "themes":
     [
         {
             "name": "Catppuccin Mocha",
-            "tab": 
+            "tab":
             {
                 "background": "#1E1E2EFF",
                 "iconStyle": "default",
                 "showCloseButton": "always",
                 "unfocusedBackground": null
             },
-            "tabRow": 
+            "tabRow":
             {
                 "background": "#181825FF",
                 "unfocusedBackground": "#11111BFF"
             },
-            "window": 
+            "window":
             {
                 "applicationTheme": "dark",
                 "experimental.rainbowFrame": false,

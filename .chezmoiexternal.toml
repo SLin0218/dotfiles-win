@@ -1,0 +1,11 @@
+# 自动拉取并部署 Neovim 配置
+["AppData/Local/nvim"]
+type = "git-repo"
+url = "https://github.com/SLin0218/nvim-config.git"
+refreshPeriod = "168h"  # 每隔 168 小时（一周）自动 git pull 一次，可设置为 24h 等
+
+# 自动拉取并部署 Rime（小狼毫）配置
+["AppData/Roaming/Rime"]
+type = "git-repo"
+url = "https://github.com/SLin0218/rime-config.git"
+refreshPeriod = "168h"
