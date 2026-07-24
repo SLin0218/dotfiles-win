@@ -20,12 +20,18 @@ if (Get-Module -ListAvailable PSReadLine) {
     Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
     
     # 上下方向键根据已输入字符筛选历史记录
-    Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
-    Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+    Set-PSReadLineKeyHandler -Key UpArrow -ScriptBlock {
+        [Microsoft.PowerShell.PSConsoleReadLine]::HistorySearchBackward()
+        [Microsoft.PowerShell.PSConsoleReadLine]::EndOfLine()
+    }
+    
+    Set-PSReadLineKeyHandler -Key DownArrow -ScriptBlock {
+        [Microsoft.PowerShell.PSConsoleReadLine]::HistorySearchForward()
+        [Microsoft.PowerShell.PSConsoleReadLine]::EndOfLine()
+    }
     
     # 更改预测文本颜色为暗灰色
     Set-PSReadLineOption -Colors @{ InlinePrediction = "$([char]0x1b)[38;5;244m" }
-
 
     # -----------------------------------------------------------------
     # FZF 模糊搜索集成 (类似 Linux Zsh 体验)
@@ -56,3 +62,18 @@ if (Get-Command starship -ErrorAction SilentlyContinue) {
 } else {
     Write-Host "提示: 未检测到 starship，请运行 'winget install starship' 安装。" -ForegroundColor Yellow
 } 
+
+function gbash {
+    & '~\scoop\apps\git\current\bin\bash.exe' @args
+}
+
+Set-Alias -Name vim -Value nvim
+Set-Alias -Name ls -Value exa
+Set-Alias -Name vim -Value nvim
+Set-Alias -Name fetch -Value fastfetch
+
+function ll {
+  exa -l @args
+}
+
+function gst { git status @args }
