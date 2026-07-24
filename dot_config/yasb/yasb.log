@@ -1,0 +1,47 @@
+2026-07-24 11:15:42,867 [INFO] [MainThread] [root/log.py:104]: YASB v2.0.5
+2026-07-24 11:15:42,868 [INFO] [CLIPipeServer] [cli_server/cli_server.py:216]: CLI server started v1.1.7
+2026-07-24 11:15:42,869 [INFO] [MainThread] [cli_server/cli_server.py:106]: Log pipe server started
+2026-07-24 11:16:14,016 [INFO] [MainThread] [root/welcome.py:867]: Created config file at C:\Users\USER\.config\yasb\config.yaml
+2026-07-24 11:16:14,017 [INFO] [MainThread] [root/welcome.py:876]: Created styles file at C:\Users\USER\.config\yasb\styles.css
+2026-07-24 11:16:14,791 [INFO] [MainThread] [root/service.py:52]: AudioOutputService starting...
+2026-07-24 11:16:15,051 [INFO] [MainThread] [root/bar_manager.py:103]: Starting WindowsNotificationEventListener...
+2026-07-24 11:16:15,052 [INFO] [MainThread] [root/bar_manager.py:103]: Starting KomorebiEventListener...
+2026-07-24 11:16:15,052 [INFO] [MainThread] [root/bar_manager.py:103]: Starting SystemEventListener...
+2026-07-24 11:16:15,055 [INFO] [MainThread] [root/watcher.py:65]: Watching directory: c:\users\user\.config\yasb
+2026-07-24 11:16:15,055 [INFO] [MainThread] [root/watcher.py:104]: Created file watcher
+2026-07-24 11:16:15,152 [INFO] [Dummy-6] [root/event_listener.py:54]: Created named pipe yasb-07833055-870e-11f1-b59a-c0a81036988a
+2026-07-24 11:16:16,225 [WARNING] [Dummy-6] [root/event_listener.py:136]: Komorebi failed to subscribe named pipe. Error: 套接字操作遇到了一个已死的网络。 (os error 10050) Location: komorebic\src\main.rs:3157:13
+2026-07-24 11:17:08,093 [INFO] [Dummy-6] [root/event_listener.py:147]: Komorebi connected to named pipe: yasb-07833055-870e-11f1-b59a-c0a81036988a
+2026-07-24 11:17:11,249 [WARNING] [Dummy-6] [root/event_listener.py:95]: Pipe has been ended: (109, 'PeekNamedPipe', '管道已结束。')
+2026-07-24 11:17:11,249 [INFO] [Dummy-6] [root/event_listener.py:107]: Attempting to reconnect to Komorebi...
+2026-07-24 11:17:14,262 [INFO] [Dummy-6] [root/event_listener.py:54]: Created named pipe yasb-07833055-870e-11f1-b59a-c0a81036988a
+2026-07-24 11:17:14,432 [WARNING] [Dummy-6] [root/event_listener.py:134]: Komorebi failed to subscribe named pipe. Komorebi is not running, please start Komorebi.
+2026-07-24 11:17:40,340 [INFO] [Dummy-6] [root/event_listener.py:147]: Komorebi connected to named pipe: yasb-07833055-870e-11f1-b59a-c0a81036988a
+2026-07-24 11:21:29,718 [WARNING] [Dummy-6] [root/event_listener.py:95]: Pipe has been ended: (109, 'PeekNamedPipe', '管道已结束。')
+2026-07-24 11:21:29,719 [INFO] [Dummy-6] [root/event_listener.py:107]: Attempting to reconnect to Komorebi...
+2026-07-24 11:21:32,719 [INFO] [Dummy-6] [root/event_listener.py:54]: Created named pipe yasb-07833055-870e-11f1-b59a-c0a81036988a
+2026-07-24 11:21:32,894 [WARNING] [Dummy-6] [root/event_listener.py:134]: Komorebi failed to subscribe named pipe. Komorebi is not running, please start Komorebi.
+2026-07-24 11:22:45,493 [INFO] [Dummy-6] [root/event_listener.py:147]: Komorebi connected to named pipe: yasb-07833055-870e-11f1-b59a-c0a81036988a
+2026-07-24 12:08:34,529 [WARNING] [MainThread] [deprecation/deprecation.py:136]: [DEPRECATED] BarAlignment: 'center' - Use 'align' instead.
+2026-07-24 12:08:34,530 [WARNING] [MainThread] [deprecation/deprecation.py:136]: [DEPRECATED] BarBlurEffect: 'acrylic' - No longer supported and can be removed from the config.
+2026-07-24 12:08:34,532 [INFO] [MainThread] [root/controller.py:21]: Reloading Application because of config change.
+2026-07-24 12:08:34,640 [INFO] [MainThread] [cli_server/cli_server.py:114]: Log pipe server stopped
+2026-07-24 12:08:34,654 [INFO] [MainThread] [root/bar_manager.py:93]: Successfully loaded updated config and re-initialised all bars.
+2026-07-24 12:08:34,701 [INFO] [MainThread] [root/bar_manager.py:119]: Stopping WindowsNotificationEventListener...
+2026-07-24 12:08:34,706 [INFO] [MainThread] [root/bar_manager.py:119]: Stopping KomorebiEventListener...
+2026-07-24 12:08:34,710 [INFO] [MainThread] [root/bar_manager.py:119]: Stopping SystemEventListener...
+2026-07-24 12:08:35,170 [INFO] [MainThread] [root/log.py:104]: YASB v2.0.5
+2026-07-24 12:08:35,171 [INFO] [CLIPipeServer] [cli_server/cli_server.py:216]: CLI server started v1.1.7
+2026-07-24 12:08:35,171 [INFO] [MainThread] [cli_server/cli_server.py:106]: Log pipe server started
+2026-07-24 12:08:35,239 [WARNING] [MainThread] [deprecation/deprecation.py:136]: [DEPRECATED] BarAlignment: 'center' - Use 'align' instead.
+2026-07-24 12:08:35,239 [WARNING] [MainThread] [deprecation/deprecation.py:136]: [DEPRECATED] BarBlurEffect: 'acrylic' - No longer supported and can be removed from the config.
+2026-07-24 12:08:35,773 [WARNING] [MainThread] [deprecation/deprecation.py:136]: [DEPRECATED] KomorebiWorkspacesConfig: 'animation' - Use CSS animations instead.
+2026-07-24 12:08:35,773 [WARNING] [MainThread] [deprecation/deprecation.py:136]: [DEPRECATED] KomorebiWorkspacesConfig: 'container_padding' - Use CSS padding instead.
+2026-07-24 12:08:35,777 [WARNING] [MainThread] [deprecation/deprecation.py:136]: [DEPRECATED] ActiveLayoutConfig: 'container_padding' - Use CSS padding instead.
+2026-07-24 12:08:35,777 [WARNING] [MainThread] [deprecation/deprecation.py:140]: [DEPRECATED] ActiveLayoutIconsConfig: 'maximised' renamed to 'maximized' - Use 'maximized' instead.
+2026-07-24 12:08:36,282 [INFO] [MainThread] [root/bar_manager.py:103]: Starting KomorebiEventListener...
+2026-07-24 12:08:36,282 [INFO] [MainThread] [root/bar_manager.py:103]: Starting SystemEventListener...
+2026-07-24 12:08:36,284 [INFO] [MainThread] [root/watcher.py:65]: Watching directory: c:\users\user\.config\yasb
+2026-07-24 12:08:36,284 [INFO] [MainThread] [root/watcher.py:104]: Created file watcher
+2026-07-24 12:08:36,284 [INFO] [Dummy-5] [root/event_listener.py:54]: Created named pipe yasb-57d4d7e8-8715-11f1-bda9-c0a81036988a
+2026-07-24 12:08:36,583 [INFO] [Dummy-5] [root/event_listener.py:147]: Komorebi connected to named pipe: yasb-57d4d7e8-8715-11f1-bda9-c0a81036988a
