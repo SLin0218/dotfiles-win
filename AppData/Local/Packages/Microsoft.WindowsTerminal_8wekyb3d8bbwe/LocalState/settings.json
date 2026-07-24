@@ -38,15 +38,38 @@
         "defaults": 
         {
             "colorScheme": "Catppuccin Mocha",
-            "cursorShape": "underscore"
+            "cursorShape": "underscore",
+	    "adjustIndistinguishableColors": "indexed",
+            "antialiasingMode": "grayscale",
+	    "bellStyle": 
+            [
+                "window",
+                "taskbar"
+            ],
+	    "experimental.retroTerminalEffect": false,
+            "font": 
+            {
+            	"face": "JetBrainsMono Nerd Font Mono",
+                "size": 12,
+                "weight": "normal"
+            },
+            "intenseTextStyle": "bold",
+            "opacity": 90,
+            "padding": "20,20,10,0",
+            "scrollbarState": "hidden",
+            "useAcrylic": true
+	    
         },
         "list": 
         [
-            {
-                "guid": "{f939fa04-d1e9-5cab-ad31-4ec08665b836}",
+	   {
+                "commandline": "C:\\windows\\system32\\wsl.exe --distribution-id {c64a57b4-822a-40fb-b34e-b1d2c5e88878}",
+                "guid": "{70efe702-c5d0-4252-88f6-b1e8a20ea843}",
                 "hidden": false,
+                "icon": "C:\\Users\\USER\\AppData\\Local\\wsl\\{c64a57b4-822a-40fb-b34e-b1d2c5e88878}\\shortcut.ico",
                 "name": "NixOS",
-                "source": "Microsoft.WSL"
+                "pathTranslationStyle": "wsl",
+                "startingDirectory": "~"
             },
             {
                 "commandline": "pwsh.exe",

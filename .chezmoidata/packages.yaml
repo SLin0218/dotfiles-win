@@ -29,6 +29,12 @@ packages:
       - "main/eza"
       - "main/jq"
       - "main/zoxide"
+    winget:
+      - "Rime.Weasel"
+      - "Microsoft.PowerShell"
+      - "Brave.Brave"
+      - "EVCOM.JetBrainsMonoNerdFont"
+
     importRegistry:
       # - '$env:USERPROFILE\scoop\apps\windows-terminal\current\install-context.reg'
       - '$env:USERPROFILE\scoop\apps\pwsh\current\install-explorer-context.reg'
