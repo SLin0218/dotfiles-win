@@ -1,4 +1,5 @@
-# Refs: 
+# vim: set ft=ps1:
+# Refs:
 # https://github.com/neersighted/dotfiles/blob/3fd327c6d4c263087999ab1c9e0bfd96c806ab5c/home/.chezmoiscripts/run_onchange_after_windows_preferences.ps1
 
 # Self-elevate the script if required
@@ -27,6 +28,12 @@ Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer
 # Unhide file ext
 Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name HideFileExt -Value 0
 Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name ShowSuperHidden -Value 0
+# 禁用锁屏
+$registryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\System"
+if (!(Test-Path $registryPath)) {
+    New-Item -Path $registryPath -Force | Out-Null
+}
+Set-ItemProperty -Path $registryPath -Name "DisableLockWorkstation" -Value 1 -Type DWord
 
 {{ range $feature := .config.windows.features.enable }}
 Write-Host 'Enable {{ $feature }}...'

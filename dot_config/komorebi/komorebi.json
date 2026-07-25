@@ -69,13 +69,7 @@
         },
         {
           "layout": "BSP",
-          "name": "2",
-          "workspace_rules": [
-            {
-              "id": "explorer.exe",
-              "kind": "Exe"
-            }
-          ]
+          "name": "2"
         },
         {
           "name": "3",

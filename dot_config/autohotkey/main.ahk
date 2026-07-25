@@ -20,6 +20,8 @@ SetCapsLockState("AlwaysOff")
     }
 }
 
+~LWin::Send("{Blind}{vkE8}")
+
 ; ==========================================
 ; 2. 仅在 Windows Terminal 中生效的快捷键
 ; ==========================================
@@ -117,6 +119,8 @@ Komorebic(cmd) {
 !6::Komorebic("focus-workspace 5")
 !7::Komorebic("focus-workspace 6")
 !8::Komorebic("focus-workspace 7")
+!9::Komorebic("focus-workspace 8")
+!0::Komorebic("focus-workspace 9")
 
 ; Move windows across workspaces
 !+1::Komorebic("move-to-workspace 0")
@@ -127,6 +131,8 @@ Komorebic(cmd) {
 !+6::Komorebic("move-to-workspace 5")
 !+7::Komorebic("move-to-workspace 6")
 !+8::Komorebic("move-to-workspace 7")
+!+9::Komorebic("move-to-workspace 8")
+!+0::Komorebic("move-to-workspace 9")
 
 ; ==========================================
 ; 适配 Komorebi 的通用跳转函数

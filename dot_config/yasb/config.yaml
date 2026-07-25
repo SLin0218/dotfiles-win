@@ -4,7 +4,7 @@ debug: false
 
 komorebi:
   start_command: "komorebic start --ahk"
-  stop_command: "komorebic stop --whkd"
+  stop_command: "komorebic stop --ahk"
   reload_command: "komorebic stop --whkd && komorebic start --ahk"
 
 bars:
