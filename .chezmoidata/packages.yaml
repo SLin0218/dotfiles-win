@@ -29,11 +29,6 @@ packages:
       - "main/eza"
       - "main/jq"
       - "main/zoxide"
-    winget:
-      - "Rime.Weasel"
-      - "Microsoft.PowerShell"
-      - "Brave.Brave"
-      - "EVCOM.JetBrainsMonoNerdFont"
 
     importRegistry:
       # - '$env:USERPROFILE\scoop\apps\windows-terminal\current\install-context.reg'
@@ -46,3 +41,12 @@ packages:
       #- '$env:USERPROFILE\scoop\apps\vscode\current\install-context.reg'
       - '$env:USERPROFILE\scoop\apps\git\current\install-associations.reg'
       - '$env:USERPROFILE\scoop\apps\git\current\install-context.reg'
+  winget:
+    - "Rime.Weasel"
+    - "Microsoft.PowerShell"
+    - "Brave.Brave"
+    - "DEVCOM.JetBrainsMonoNerdFont"
+  psGallery:
+    - "PsReadLine"
+    - "PSFzf"
+    # - "CompletionPredictor"

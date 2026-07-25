@@ -6,30 +6,35 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
 # =====================================================================
+# 定义环境变量
+# =====================================================================
+[Environment]::SetEnvironmentVariable("KOMOREBI_CONFIG_HOME", "$HOME\.config\komorebi", "User")
+
+# =====================================================================
 # PSReadLine 智能补全与历史记录 (体验类似 Zsh)
 # =====================================================================
 if (Get-Module -ListAvailable PSReadLine) {
     Import-Module PSReadLine
     Set-PSReadLineOption -EditMode Emacs
-    
+
     # 开启类似 zsh-autosuggestions 的历史命令灰色预测
     Set-PSReadLineOption -PredictionSource History
     Set-PSReadLineOption -PredictionViewStyle InlineView
-    
+
     # Tab 键触发类 Linux 的网格菜单补全
     Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
-    
+
     # 上下方向键根据已输入字符筛选历史记录
     Set-PSReadLineKeyHandler -Key UpArrow -ScriptBlock {
         [Microsoft.PowerShell.PSConsoleReadLine]::HistorySearchBackward()
         [Microsoft.PowerShell.PSConsoleReadLine]::EndOfLine()
     }
-    
+
     Set-PSReadLineKeyHandler -Key DownArrow -ScriptBlock {
         [Microsoft.PowerShell.PSConsoleReadLine]::HistorySearchForward()
         [Microsoft.PowerShell.PSConsoleReadLine]::EndOfLine()
     }
-    
+
     # 更改预测文本颜色为暗灰色
     Set-PSReadLineOption -Colors @{ InlinePrediction = "$([char]0x1b)[38;5;244m" }
 
@@ -42,7 +47,7 @@ if (Get-Module -ListAvailable PSReadLine) {
         if (Get-Command Set-PsFzfOption -ErrorAction SilentlyContinue) {
             Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
         }
-        
+
         # 替换 Tab 键：触发自动提示时，直接调用 fzf 进行交互式筛选 (极度丝滑)
         Set-PSReadLineKeyHandler -Key Tab -ScriptBlock {
             Invoke-FzfTabCompletion
@@ -61,7 +66,7 @@ if (Get-Command starship -ErrorAction SilentlyContinue) {
     Invoke-Expression (&starship init powershell)
 } else {
     Write-Host "提示: 未检测到 starship，请运行 'winget install starship' 安装。" -ForegroundColor Yellow
-} 
+}
 
 function gbash {
     & '~\scoop\apps\git\current\bin\bash.exe' @args
@@ -77,3 +82,9 @@ function ll {
 }
 
 function gst { git status @args }
+
+# 自动完成
+$CompletionDir = Join-Path (Split-Path $PROFILE) "completions"
+if (Test-Path $CompletionDir) {
+    Get-ChildItem (Join-Path $CompletionDir "*.ps1") | ForEach-Object { . $_.FullName }
+}

@@ -1,3 +1,4 @@
+// vim: set ft=jsonc:
 {
   "app_specific_configuration_path": "$Env:USERPROFILE/.config/komorebi/applications.json",
   "border": true,
@@ -159,7 +160,7 @@
   "theme": {
     "name": "Mocha",
     "palette": "Catppuccin",
-    "single_border": "Lavender",
+    "single_border": "Mauve",
     "monocle_border": "Blue",
     "floating_border": "Yellow",
     "unfocused_border": "Surface2"
