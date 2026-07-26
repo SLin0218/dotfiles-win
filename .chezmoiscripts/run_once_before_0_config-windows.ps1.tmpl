@@ -35,6 +35,11 @@ if (!(Test-Path $registryPath)) {
 }
 Set-ItemProperty -Path $registryPath -Name "DisableLockWorkstation" -Value 1 -Type DWord
 
+# 修改 GameDVR 注册表
+Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" -Name "AppCaptureEnabled" -Value 0 -Type DWord
+# GameConfigStore 注册表
+Set-ItemProperty -Path "HKCU:\System\GameConfigStore" -Name "GameDVR_Enabled" -Value 0 -Type DWord
+
 {{ range $feature := .config.windows.features.enable }}
 Write-Host 'Enable {{ $feature }}...'
 Enable-WindowsOptionalFeature -Online -FeatureName '{{ $feature }}'
