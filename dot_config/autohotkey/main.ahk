@@ -167,3 +167,78 @@ ToggleOrRunKomorebi(winTitle, exeName)
   ToggleOrRunKomorebi("ahk_exe brave.exe", "brave.exe")
 }
 
+; 初始化全局变量
+InMarkMode := false    ; 是否进入了标记模式
+SelectMode := false    ; 是否开启了选择模式（类似 Vim 的 v 键）
+
+; 2. 只有在标记模式下，按键才生效
+#HotIf WinActive("ahk_exe WindowsTerminal.exe")
+
+;  进入标记模式 (Ctrl + Shift + Enter)
+^+Enter:: {
+    global InMarkMode := true
+    global SelectMode := false ; 每次进入时默认关闭选择模式
+    Send("^+m")
+    UpdateStatusIndicator()    ; 显示提示
+}
+
+#HotIf InMarkMode
+; 【核心：按 v 键切换选择模式】
+v:: {
+    global SelectMode := !SelectMode ; 取反，按一次开启，再按一次关闭
+    UpdateStatusIndicator()    ; 显示提示
+}
+
+; 核心移动逻辑：根据 SelectMode 自动决定是否加 Shift (+)
+h:: Send(SelectMode ? "+{Left}" : "{Left}")
+j:: Send(SelectMode ? "+{Down}" : "{Down}")
+k:: Send(SelectMode ? "+{Up}" : "{Up}")
+l:: Send(SelectMode ? "+{Right}" : "{Right}")
+^:: Send(SelectMode ? "+{Home}" : "{Home}")
+$:: Send(SelectMode ? "+{End}" : "{End}")
+
+y:: {
+    global InMarkMode := false
+    Send(SelectMode ? "^+c" : "")
+    global SelectMode := false
+    UpdateStatusIndicator()          ; 移除提示
+}
+
+q:: {
+    global InMarkMode := false
+    global SelectMode := false
+    UpdateStatusIndicator()          ; 移除提示
+}
+
+Esc:: {
+    global InMarkMode := false
+    global SelectMode := false
+    UpdateStatusIndicator()          ; 移除提示
+    Send("{Esc}")
+}
+#HotIf
+
+#HotIf
+
+; ================== 核心指示器函数 ==================
+UpdateStatusIndicator() {
+    global InMarkMode, SelectMode
+
+    ; 如果退出了模式，直接关闭提示
+    if (!InMarkMode) {
+        ToolTip()
+        return
+    }
+
+    ; 根据当前状态组装文字
+    statusText := SelectMode ? "模式: -- VISUAL --" : "模式: -- NORMAL --"
+
+    ; 获取当前活动窗口（终端）的位置，把提示框固定在终端窗口的右上角
+    if WinExist("A") {
+        WinGetPos(&X, &Y, &W, &H, "A")
+        ; 提示框显示在终端内部右上角，向下向左偏移一点防止贴边
+        ToolTip(statusText, X, Y)
+    } else {
+        ToolTip(statusText) ; 备用：如果获取不到窗口，直接显示在鼠标光标旁
+    }
+}
