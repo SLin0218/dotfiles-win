@@ -3,10 +3,10 @@
 #SingleInstance Force
 DetectHiddenWindows(True)
 
-; 1. 强制关闭 CapsLock 的大写锁定状态，避免干扰
+; 强制关闭 CapsLock 的大写锁定状态，避免干扰
 SetCapsLockState("AlwaysOff")
 
-; 2. 当 CapsLock 被按下时，将其作为 Ctrl 键
+; 当 CapsLock 被按下时，将其作为 Ctrl 键
 *CapsLock:: {
     Send("{Blind}{Ctrl Down}")
 }
@@ -20,12 +20,16 @@ SetCapsLockState("AlwaysOff")
     }
 }
 
+; 禁用单独按下 WIN
 ~LWin::Send("{Blind}{vkE8}")
 
 ; ==========================================
-; 2. 仅在 Windows Terminal 中生效的快捷键
+; 仅在指定 app 中生效的快捷键
 ; ==========================================
-#HotIf WinActive("ahk_exe WindowsTerminal.exe")
+GroupAdd "TabeSwitchApp", "ahk_exe WindowsTerminal.exe"
+GroupAdd "TabeSwitchApp", "ahk_exe brave.exe"
+
+#HotIf WinActive("ahk_group TabeSwitchApp")
     ; Ctrl + ] 切换到下一个标签页
     ^]::Send("^{Tab}")
     ; Ctrl + [ 切换到上一个标签页

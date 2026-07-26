@@ -148,7 +148,7 @@
     ]
   },
   "ApplicationFrameHost": {
-    "tray_and_multi_window": [
+    "floating": [
       {
         "kind": "Exe",
         "id": "ApplicationFrameHost.exe",
@@ -3099,6 +3099,13 @@
   },
   "Windows Explorer": {
     "tray_and_multi_window": [
+      {
+        "kind": "Exe",
+        "id": "explorer.exe",
+        "matching_strategy": "Equals"
+      }
+    ],
+    "floating": [
       {
         "kind": "Exe",
         "id": "explorer.exe",

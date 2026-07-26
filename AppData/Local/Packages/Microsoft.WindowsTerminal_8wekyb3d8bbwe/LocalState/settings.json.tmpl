@@ -1,4 +1,4 @@
-// vim: set ft=jsonc:
+// vim: set ft=jsonc :
 {
   "$help": "https://aka.ms/terminal-documentation",
   "$schema": "https://aka.ms/terminal-profiles-schema",
@@ -13,12 +13,16 @@
   ],
   "keybindings": [
     {
+      "id": "Terminal.MoveFocusUp",
+      "keys": "ctrl+shift+k"
+    },
+    {
       "id": null,
       "keys": "alt+shift+minus"
     },
     {
-      "id": "Terminal.MoveFocusUp",
-      "keys": "ctrl+shift+k"
+      "id": "User.splitPane.D5151347",
+      "keys": "ctrl+shift+5"
     },
     {
       "id": "Terminal.CopyToClipboard",
@@ -31,10 +35,6 @@
     {
       "id": "Terminal.DuplicatePaneAuto",
       "keys": "alt+shift+d"
-    },
-    {
-      "id": "User.splitPane.D5151347",
-      "keys": "ctrl+shift+5"
     },
     {
       "id": "User.splitPane.864CD510",
@@ -81,11 +81,14 @@
   ],
   "profiles": {
     "defaults": {
-      "colorScheme": "Catppuccin Mocha",
-      "cursorShape": "underscore",
       "adjustIndistinguishableColors": "indexed",
       "antialiasingMode": "grayscale",
-      "bellStyle": ["window", "taskbar"],
+      "bellStyle": [
+        "window",
+        "taskbar"
+      ],
+      "colorScheme": "Catppuccin Mocha",
+      "cursorShape": "underscore",
       "experimental.retroTerminalEffect": false,
       "font": {
         "face": "JetBrainsMono Nerd Font Mono",
@@ -100,10 +103,10 @@
     },
     "list": [
       {
-        "commandline": "C:\\windows\\system32\\wsl.exe --distribution-id {c64a57b4-822a-40fb-b34e-b1d2c5e88878}",
-        "guid": "{70efe702-c5d0-4252-88f6-b1e8a20ea843}",
+        "commandline": "C:\\Windows\\system32\\wsl.exe",
+        "guid": "{101403c7-4377-4e98-8231-bef144c66cba}",
         "hidden": false,
-        "icon": "C:\\Users\\USER\\AppData\\Local\\wsl\\{c64a57b4-822a-40fb-b34e-b1d2c5e88878}\\shortcut.ico",
+        "icon": "%USERPROFILE%\\images\\nixos.ico",
         "name": "NixOS",
         "pathTranslationStyle": "wsl",
         "startingDirectory": "~"
@@ -112,8 +115,8 @@
         "commandline": "pwsh.exe",
         "guid": "{d510c7f4-dfa3-4324-af88-b36d565c3755}",
         "hidden": false,
-        "icon": "ms-appx:///ProfileIcons/pwsh.png",
-        "name": "PowerShell",
+        "icon": "%USERPROFILE%\\images\\powershell.png",
+        "name": "PowerShell 7",
         "startingDirectory": "%USERPROFILE%"
       }
     ]
