@@ -24,6 +24,7 @@
 }
  .clock-widget .label {
     padding-left:8px;
+    font-size: 13px;
 }
 .komorebi-workspaces .ws-btn {
 	font-size: 18px;
@@ -49,6 +50,9 @@
 	color: rgba(191, 202, 219, 0.726);
 	font-weight: 600;
 	font-family: "Microsoft YaHei UI";
+}
+.power-widget .label {
+  font-size: 13px;
 }
 .power-menu-widget .label {
 	color: #eba0ac;
@@ -95,13 +99,18 @@
 	color: #89b4fa;
 	margin: 1px 2px 0 0;
 }
+
+.volume-widget .label {
+  font-size: 13px;
+}
+
 .start-menu .icon {
     font-size: 18px;
 	color: #89b4fa
 }
 .clock-widget .icon {
 	color: #cba6f7;
-    font-size: 14px;
+  font-size: 13px;
 }
 /* WEATHER WIDGET */
 .weather-widget .icon {
@@ -384,21 +393,216 @@
     background: rgba(255, 255, 255, 0.1);
 }
 
-.language-menu {
-    background-color: rgba(17, 17, 27, 0.4);
+.battery-widget {
+    padding: 0 8px;
+}
+.battery-widget .label {
+    font-size: 13px;
+    color: #e0e0e0;
+}
+.battery-widget .icon {
+    font-size: 14px;
+    margin-right: 6px;
+}
+/* Critical - red */
+.battery-widget .icon.status-critical {
+    color: #ff4444;
+}
+.battery-widget .label.status-critical {
+    color: #ff6b6b;
+}
+/* Low - orange */
+.battery-widget .icon.status-low {
+    color: #ff9800;
+}
+.battery-widget .label.status-low {
+    color: #ffb74d;
+}
+/* Medium - yellow */
+.battery-widget .icon.status-medium {
+    color: #ffc107;
+}
+/* High - light green */
+.battery-widget .icon.status-high {
+    color: #8bc34a;
+}
+/* Full - green */
+.battery-widget .icon.status-full {
+    color: #4caf50;
+}
+/* Charging - cyan */
+.battery-widget .icon.status-charging {
+    color: #00bcd4;
+}
+.battery-widget .label.status-charging {
+    color: #4dd0e1;
+}
+
+.brightness-menu {
+    background-color: rgba(36, 36, 36, 0.75);
     min-width: 300px;
 }
-.language-menu .header {
+/* Grouping for monitor rows including title and sliders */
+.brightness-menu .monitor-row {
+    background-color: rgba(139, 69, 19, 0);
+    margin: 12px;
+}
+/*
+.monitor-0 is indexed as the first monitor row,
+adjust if you have multiple monitors and want to style them differently correctly.
+*/
+.brightness-menu .monitor-row.monitor-0 {
+    margin-bottom: 0;
+}
+.brightness-menu .monitor-title  {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-top: 4px;
+}
+.brightness-menu .monitor-subtitle {
+    font-size: 11px;
+    color: #a6adc8;
+    margin-top: 2px;
+    margin-bottom: 8px;
+}
+/* Container for the sliders to create a grouped appearance including icons and sliders */
+.brightness-menu .slider-rows {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 16px;
+}
+.brightness-menu .slider-icon {
+    font-family: "Segoe Fluent Icons";
+}
+.brightness-menu .slider-row {
+    margin: 4px 0;
+    padding: 8px 0px;
+}
+/* optional styles for the brightness and contrast sliders */
+.brightness-slider::groove {}
+.contrast-slider::groove {}
+.brightness-slider::handle{} 
+.contrast-slider::handle{}
+
+/* Brightness progress bar styles if enabled */
+.brightness-widget .progress-container {} 
+
+.brightness-widget .widget-container .label {
+  font-size: 13px;
+}
+
+.wifi-widget .label {
+  font-size: 13px;
+}
+
+.wifi-menu {
+    font-family: 'Segoe UI';
+    background-color: rgba(17, 17, 27, 0.4);
+    max-height: 350px;
+    min-height: 375px;
+    min-width: 375px;
+}
+
+.wifi-menu .progress-bar {
+    max-height: 2px;
+    color: #4cc2ff;
+}
+
+.wifi-menu .header {
     font-family: 'Segoe UI';
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 2px;
     padding: 12px;
     background-color: rgba(17, 17, 27, 0.6);
+    color: white;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-.language-menu .footer {
+
+.wifi-menu .error-message {
     font-family: 'Segoe UI';
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+    padding: 12px;
+    background-color: red;
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.wifi-menu .wifi-list {
+    background-color: rgba(17, 17, 27, 0.8);
+    margin-right: 3px;
+}
+
+.wifi-menu .wifi-item {
+    min-height: 35px;
+    padding: 2px 12px;
+    margin: 2px 4px;
+}
+
+.wifi-menu .wifi-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+}
+
+.wifi-menu .wifi-item[active=true] {
+    background-color: rgba(255, 255, 255, 0.15);
+    font-size: 14px;
+    border-radius: 6px;
+    min-height: 80px;
+}
+
+.wifi-menu .wifi-item .icon {
+    font-family: 'Segoe Fluent Icons';
+    font-size: 26px;
+    margin-right: 10px;
+}
+
+.wifi-menu .wifi-item .name {
+    font-family: 'Segoe UI';
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.wifi-menu .wifi-item .password {
+    font-family: 'Segoe UI';
+    background-color: transparent;
+    font-size: 14px;
+}
+
+.wifi-menu .wifi-item .status {
+    font-family: 'Segoe UI';
+    font-size: 14px;
+}
+
+.wifi-menu .wifi-item .strength {
+    font-family: 'Segoe UI';
+    font-size: 14px;
+}
+
+.wifi-menu .wifi-item .controls-container {
+    padding-top: 8px;
+}
+
+.wifi-menu .wifi-item .connect {
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 4px 30px;
+    border-radius: 4px;
+    border: none;
+    font-size: 14px;
+}
+
+.wifi-menu .wifi-item .connect:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.wifi-menu .wifi-item .connect:pressed {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.wifi-menu .footer {
     font-size: 12px;
     font-weight: 600;
     padding: 12px;
@@ -407,43 +611,27 @@
     background-color: rgba(17, 17, 27, 0.6);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
-.language-menu .footer:hover {
-    background-color: rgba(36, 36, 51, 0.6);
+
+.wifi-menu .footer .settings-button {
+    font-family: 'Segoe UI';
+    background-color: transparent;
+    border: none;
+    padding: 0 2px;
+    min-width: 26px;
+    min-height: 26px;
     color: #fff;
 }
-.language-menu .language-item {
-    padding: 6px 12px;
-    margin: 2px 4px;
-}
-.language-menu .language-item.active {
-    background-color:rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-}
-.language-menu .language-item:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-}
-.language-menu .language-item.active:hover {
-    background-color:rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-}
-.language-menu .language-item .code {
-    font-weight: 900;
-    font-size: 14px;
-    min-width: 40px;
-    text-transform: uppercase;
-}
-.language-menu .language-item .icon {
-    font-size: 16px;
-    margin-right: 8px;
+
+.wifi-menu .footer .refresh-icon {
+    font-family: 'Segoe Fluent Icons';
+    background-color: transparent;
+    border: none;
+    min-width: 26px;
+    min-height: 26px;
     color: #fff;
 }
-.language-menu .language-item .name {
-    font-weight: 600;
-    font-family: 'Segoe UI';
-    font-size: 14px;
-}
-.language-menu .language-item .layout {
-    font-weight: 600;
-    font-family: 'Segoe UI';
-    font-size: 12px;
+
+.wifi-menu .footer .refresh-icon:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
 }

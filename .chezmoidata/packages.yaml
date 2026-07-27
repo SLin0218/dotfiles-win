@@ -5,20 +5,9 @@ packages:
     pkgs:
       - "main/7zip"
       - "main/unrar"
-
       - "main/neovim"
-
-      - "extras/scoop-completion"
-
-      # wm
-      - "extras/komorebi"
-      # status bar
-      - "extras/yasb"
-
-      - "extras/powertoys"
-      - "extras/powertoys"
-
-      - "main/fastfetch"
+      - "main/msys2"
+      - "main/nodejs"
       - "main/wget"
       - "main/starship"
       - "main/fzf"
@@ -29,12 +18,24 @@ packages:
       - "main/eza"
       - "main/jq"
       - "main/zoxide"
+      - "main/git"
+
+      # wm
+      # - "extras/komorebi"
+      # status bar
+      # - "extras/yasb"
+      - "extras/powertoys"
+      - "extras/scoop-completion"
+      - "extras/autohotkey"
+      - "extras/wezterm"
+
 
     importRegistry:
       # - '$env:USERPROFILE\scoop\apps\windows-terminal\current\install-context.reg'
       - '$env:USERPROFILE\scoop\apps\pwsh\current\install-explorer-context.reg'
       - '$env:USERPROFILE\scoop\apps\pwsh\current\install-file-context.reg'
       - '$env:USERPROFILE\scoop\apps\7zip\current\install-context.reg'
+      - '$env:USERPROFILE\scoop\apps\wezterm\current\install-context.reg'
       #- '$env:USERPROFILE\scoop\apps\vscode\current\install-github-integration.reg'
       #- '$env:USERPROFILE\scoop\apps\vscode\current\install-associations.reg'
       #- '$env:USERPROFILE\scoop\apps\vscode\current\install-github-integration.reg'

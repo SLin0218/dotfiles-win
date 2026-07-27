@@ -37,7 +37,7 @@ bars:
           "komorebi_workspaces",
         ]
       center: ["media"]
-      right: ["systray", "weather", "language", "volume", "clock", "power_menu"]
+      right: ["systray", "weather", "battery", "brightness", "volume", "wifi", "clock", "power_menu"]
 widgets:
   media:
     type: "yasb.media.MediaWidget"
@@ -62,8 +62,8 @@ widgets:
   clock:
     type: "yasb.clock.ClockWidget"
     options:
-      label: "<span>\uf4ab</span> {%H:%M}"
-      label_alt: "<span>\uf4ab</span> {%A, %d %B %Y %H:%M}"
+      label: "\uf4ab {%H:%M}"
+      label_alt: "\uf4ab {%A, %d %B %Y %H:%M}"
       timezones: [] #Looking up time zone info from registry
   komorebi_workspaces:
     type: "komorebi.workspaces.WorkspaceWidget"
@@ -112,9 +112,9 @@ widgets:
   weather:
     type: "yasb.weather.WeatherWidget"
     options:
-      label: "<span>{icon}</span> {temp}"
+      label: "{icon} {temp}"
       label_alt: "{location}: Min {min_temp}, Max {max_temp}, Humidity {humidity}"
-      api_key: "3bf4cf9a7c3f40d6b31174128242807"
+      api_key: "b76412670c8146869c914040262707"
       update_interval: 600 #Update interval in seconds, Min 600
       hide_decimal: true
       location: "GuangZhou"
@@ -136,7 +136,7 @@ widgets:
   volume:
     type: "yasb.volume.VolumeWidget"
     options:
-      label: "<span>{icon}</span> {level}"
+      label: "{icon} {level}"
       label_alt: "{volume}"
       icons:
         - "\ueee8" # Icon for muted
@@ -176,31 +176,35 @@ widgets:
       icon_size: 16
       pin_click_modifier: "alt"
       show_unpinned_button: false
-      show_in_popup: false
       show_unpinned: true
+      show_in_popup: false
       icons_per_row: 4
       use_hook: true
-  language:
-    type: "yasb.language.LanguageWidget"
+  battery:
+    type: "yasb.battery.BatteryWidget"
     options:
-      label: "{lang[language_code]}-{lang[country_code]}"
-      label_alt: "{lang[full_name]}"
-      update_interval: 5
-      callbacks:
-        on_left: "toggle_menu"
-        on_middle: "do_nothing"
-        on_right: "toggle_label"
-      language_menu:
-        blur: true
-        round_corners: true
-        round_corners_type: "normal"
-        border_color: "system"
-        alignment: "right"
-        direction: "down"
-        offset_top: 6
-        offset_left: 0
-        show_layout_icon: true
-        layout_icon: "\uf11c"
+      label: "<span>{icon}</span> {percent}%"
+      label_alt: "<span>{icon}</span> {percent}% | {power}W | {time_remaining}"
+      update_interval: 5000
+      time_remaining_natural: False
+      hide_unsupported: True
+      charging_options:
+        icon_format: "{charging_icon}"
+        blink_charging_icon: true
+        blink_interval: 500
+      status_thresholds:
+        critical: 10
+        low: 25
+        medium: 75
+        high: 95
+        full: 100
+      status_icons:
+        icon_charging: "\uf0e7"
+        icon_critical: "\uf244"
+        icon_low: "\uf243"
+        icon_medium: "\uf242"
+        icon_high: "\uf241"
+        icon_full: "\uf240"
   quick_launch:
     type: "yasb.quick_launch.QuickLaunchWidget"
     options:
@@ -335,3 +339,77 @@ widgets:
       keybindings:
         - keys: "alt+space"
           action: "toggle_quick_launch"
+  brightness:
+    type: "yasb.brightness.BrightnessWidget"
+    options:
+      label: "{icon} {percent}%"
+      label_alt: "Brightness {percent}%"
+      tooltip: true
+      hide_unsupported: true
+      brightness_toggle_level: [0, 50, 100]
+      auto_light: false
+      auto_light_icon: "\udb80\udce1"
+      auto_light_night_level: 35
+      auto_light_night_start_time: "19:00"
+      auto_light_night_end_time: "06:45"
+      auto_light_day_level: 75
+      brightness_icons: [
+        "\udb80\udcde",  # Icon for 0-25% brightness
+        "\udb80\udcdd",  # Icon for 26-50% brightness
+        "\udb80\udcdf",  # Icon for 51-75% brightness
+        "\udb80\udce0"   # Icon for 76-100% brightness
+      ]
+      brightness_menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "System"
+        alignment: "right"
+        direction: "down"
+        brightness_icon: "\ue706"
+        contrast_icon: "\ue7a1"
+      callbacks:
+        on_left: "toggle_brightness_menu"
+        on_right: "toggle_label"
+  wifi:
+    type: "yasb.wifi.WifiWidget"
+    options:
+      label: "{wifi_icon}"
+      label_alt: "{wifi_name} {wifi_strength}%"
+      update_interval: 5000
+      callbacks:
+        on_left: "toggle_menu"
+        on_middle: "exec cmd.exe /c start ms-settings:network"
+        on_right: "toggle_label"
+      ethernet_label: "<span>{wifi_icon}</span>"
+      ethernet_label_alt: "<span>{wifi_icon}</span>{ip_addr}"
+      ethernet_icon: "\ueba9"
+      get_exact_wifi_strength: false  # Optional. Will require location access permission if true.
+      wifi_icons: [
+        "\udb82\udd2e",  # Icon for 0% strength
+        "\udb82\udd1f",  # Icon for 1-24% strength
+        "\udb82\udd22",  # Icon for 25-49% strength
+        "\udb82\udd25",  # Icon for 50-74% strength
+        "\udb82\udd28"   # Icon for 75-100% strength
+      ]
+      menu_config:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "System"
+        alignment: "right"
+        direction: "down"
+        offset_top: 6
+        offset_left: 0
+        wifi_icons_secured: [
+          "\ue670",
+          "\ue671",
+          "\ue672",
+          "\ue673",
+        ]
+        wifi_icons_unsecured: [
+          "\uec3c",
+          "\uec3d",
+          "\uec3e",
+          "\uec3f",
+        ]

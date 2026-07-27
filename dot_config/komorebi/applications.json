@@ -354,6 +354,13 @@
         "id": "brave.exe",
         "matching_strategy": "Equals"
       }
+    ],
+    "floating": [
+      {
+        "kind": "Title",
+        "id": "Bitwarden",
+        "matching_strategy": "Equals"
+      }
     ]
   },
   "Browser Tamer": {
@@ -3289,5 +3296,17 @@
         "matching_strategy": "Equals"
       }
     ]
-  }
+  },
+  "Emacs": {
+      "manage_rules": [
+        {
+          "kind": "ExeName",
+          "id": "msrdc.exe"
+        },
+        {
+          "kind": "ClassName",
+          "id": "RAIL_WINDOW"
+        }
+      ]
+    }
 }
