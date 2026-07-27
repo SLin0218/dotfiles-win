@@ -6,11 +6,6 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
 # =====================================================================
-# 定义环境变量
-# =====================================================================
-[Environment]::SetEnvironmentVariable("KOMOREBI_CONFIG_HOME", "$HOME\.config\komorebi", "User")
-
-# =====================================================================
 # PSReadLine 智能补全与历史记录 (体验类似 Zsh)
 # =====================================================================
 if (Get-Module -ListAvailable PSReadLine) {
@@ -78,10 +73,18 @@ Set-Alias -Name vim -Value nvim
 Set-Alias -Name fetch -Value fastfetch
 
 function ll {
+  exa -al @args
+}
+
+function l {
   exa -l @args
 }
 
 function gst { git status @args }
+function gl { git pull @args }
+function gcl { git clone @args }
+function gcms { git commit -m @args }
+function gp { git puth @args }
 
 # 自动完成
 $CompletionDir = Join-Path (Split-Path $PROFILE) "completions"
