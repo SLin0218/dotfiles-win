@@ -134,6 +134,7 @@ tabline.setup({
 					["lua"] = { wezterm.nerdfonts.seti_lua },
 					["make"] = wezterm.nerdfonts.seti_makefile,
 					["nix"] = { wezterm.nerdfonts.linux_nixos },
+          ["wslhost.exe"] = { wezterm.nerdfonts.linux_nixos },
 					["node"] = { wezterm.nerdfonts.md_nodejs },
 					["npm"] = { wezterm.nerdfonts.md_npm },
 					["nvim"] = { wezterm.nerdfonts.custom_neovim },
