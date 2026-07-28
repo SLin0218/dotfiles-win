@@ -17,7 +17,7 @@ config.launch_menu = {
 		args = { "pwsh.exe", "-NoLogo" },
 	},
 	{
-		label = "Nix OS",
+		label = "NixOS",
 		args = { "wsl.exe", "--cd", "~" },
 	},
 }
@@ -35,11 +35,9 @@ config.color_scheme = "Catppuccin Mocha"
 
 -- Windows 11/10 磨砂玻璃效果
 config.win32_system_backdrop = "Acrylic"
-config.window_background_opacity = 0.85
+config.window_background_opacity = 1.0
 -- 隐藏标题栏（仅保留调整大小的边框）
 -- config.window_decorations = "RESIZE"
--- 让标签栏（Tabs）直接显示在窗口顶部，不占用额外空间
-config.use_fancy_tab_bar = false
 config.default_cursor_style = "BlinkingUnderline"
 
 -- ==========================================
@@ -144,13 +142,20 @@ tabline.setup({
 				-- process_to_icon is a table that maps process to icons
 			},
 		},
-		tab_inactive = { "index", { "process", padding = { left = 0, right = 1 } } },
-		tabline_x = { "ram", "cpu" },
-		tabline_y = { "datetime", "battery" },
+		-- tab_inactive = { "index", { "process", padding = { left = 0, right = 1 } } },
+		-- tabline_x = { "ram", "cpu" },
+		-- tabline_y = { "datetime", "battery" },
 		tabline_z = { "domain" },
 	},
 	extensions = {},
 })
+
 tabline.apply_to_config(config)
+config.window_padding = {
+	left = 20,
+	right = 20,
+	top = 10,
+	bottom = 0,
+}
 
 return config
