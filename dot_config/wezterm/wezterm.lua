@@ -80,6 +80,31 @@ config.keys = {
 	{ key = "Enter", mods = "LEADER", action = wezterm.action.ActivateCopyMode },
 	{ key = "z", mods = "LEADER", action = wezterm.action.TogglePaneZoomState },
 	{ key = "r", mods = "CTRL|SHIFT", action = wezterm.action.ReloadConfiguration },
+
+	{
+		key = "n",
+		mods = "LEADER",
+		action = wezterm.action.PromptInputLine({
+			description = "Enter new tab title:",
+			action = wezterm.action_callback(function(window, _, line)
+				if line then
+					window:mux_window():active_tab():set_title(line)
+				end
+			end),
+		}),
+	},
+	-- 向左移动标签页
+	{
+		key = "<",
+		mods = "LEADER|SHIFT",
+		action = wezterm.action.MoveTabRelative(-1),
+	},
+	-- 向右移动标签页
+	{
+		key = ">",
+		mods = "LEADER|SHIFT",
+		action = wezterm.action.MoveTabRelative(1),
+	},
 }
 
 local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
@@ -134,7 +159,7 @@ tabline.setup({
 					["lua"] = { wezterm.nerdfonts.seti_lua },
 					["make"] = wezterm.nerdfonts.seti_makefile,
 					["nix"] = { wezterm.nerdfonts.linux_nixos },
-          ["wslhost.exe"] = { wezterm.nerdfonts.linux_nixos },
+					["wslhost.exe"] = { wezterm.nerdfonts.linux_nixos },
 					["node"] = { wezterm.nerdfonts.md_nodejs },
 					["npm"] = { wezterm.nerdfonts.md_npm },
 					["nvim"] = { wezterm.nerdfonts.custom_neovim },
