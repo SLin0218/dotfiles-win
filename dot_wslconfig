@@ -4,6 +4,10 @@ dnsProxy=false
 dnsTunneling=false
 firewall=true
 autoProxy=false
+memory=16GB
+swap=8GB
+swapFile=C:\\wsl-swap.vhdx
 
 [experimental]
 hostAddressLoopback=true
+autoMemoryReclaim=dropcache

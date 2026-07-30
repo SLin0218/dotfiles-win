@@ -41,6 +41,7 @@ CapsLock & j::Send("{Down}")
 CapsLock & h::Send("{Left}")
 CapsLock & l::Send("{Right}")
 
+CapsLock & t::Send("^{t}")
 CapsLock & f::
 {
   WinMaximize("A")
@@ -67,22 +68,20 @@ CapsLock & f::
 
 ; 在 Brave 浏览器中 Win+][ => Alt+][ 前进/后退
 #HotIf WinActive("Brave ahk_exe brave.exe")
-  #[::Send("!{Left}")
-  #]::Send("!{Right}")
+    #[::Send("!{Left}")
+    #]::Send("!{Right}")
 #HotIf
 
 ; WinTab => AltTab
 <#Tab::AltTab
 
 #HotIf WinActive("ahk_exe wezterm-gui.exe")
-  #c::Send("^+{c}")
-  #v::Send("^+{v}")
-  #x::Send("^+{x}")
+    #c::Send("^+{c}")
+    #v::Send("^+{v}")
 #HotIf
 #HotIf !WinActive("ahk_exe wezterm-gui.exe")
-  #c::Send("^{c}")
-  #v::Send("^{v}")
-  #x::Send("^{x}")
+    #c::Send("^{c}")
+    #v::Send("^{v}")
 #HotIf
 
 ; ==========================================
@@ -105,40 +104,40 @@ ToggleApp(winTitle, exeName)
 
 CapsLock & i::
 {
-  ToggleApp("ahk_exe wezterm-gui.exe", "wezterm-gui.exe")
+    ToggleApp("ahk_exe wezterm-gui.exe", "wezterm-gui.exe")
 }
 CapsLock & g::
 {
-  ToggleApp("Brave ahk_exe brave.exe", "brave.exe")
+    ToggleApp("Brave ahk_exe brave.exe", "brave.exe")
 }
 CapsLock & u::
 {
-  ToggleApp("WeLink ahk_exe WeLink.exe", "WeLink.exe")
+    ToggleApp("WeLink ahk_exe WeLink.exe", "WeLink.exe")
 }
 CapsLock & o::
 {
-  ToggleApp("ahk_class WeWorkWindow", "WXWork.exe")
+    ToggleApp("ahk_class WeWorkWindow", "WXWork.exe")
 }
-
 CapsLock & m::
 {
     if WinExist("Emacs ahk_exe msrdc.exe")
     {
-        ; 已打开 Emacs -> 切换到最前
         WinActivate("Emacs ahk_exe msrdc.exe")
     }
     else
     {
-        ; 未启动 -> 后台静默启动
         Run("wsl.exe -- exec emacs", , "Hide")
+        WinWait("Emacs ahk_exe msrdc.exe")
+        WinMaximize
     }
 }
 
 #HotIf WinActive("Emacs ahk_exe msrdc.exe")
-CapsLock & Space::Send("^{\}")
+    CapsLock & Space::Send("^{\}")
 #HotIf
+
 #HotIf !WinActive("Emacs ahk_exe msrdc.exe")
-CapsLock & Space::Send("^{Space}")
+    CapsLock & Space::Send("^{Space}")
 #HotIf
 
 ~F5:: {

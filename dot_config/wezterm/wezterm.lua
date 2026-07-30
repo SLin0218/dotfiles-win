@@ -80,6 +80,7 @@ config.keys = {
 	{ key = "Enter", mods = "LEADER", action = wezterm.action.ActivateCopyMode },
 	{ key = "z", mods = "LEADER", action = wezterm.action.TogglePaneZoomState },
 	{ key = "r", mods = "CTRL|SHIFT", action = wezterm.action.ReloadConfiguration },
+	{ key = "w", mods = "CTRL|SHIFT", action = wezterm.action.CloseCurrentTab{confirm=true} },
 
 	{
 		key = "n",
