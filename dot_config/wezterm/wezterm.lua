@@ -1,6 +1,10 @@
 local wezterm = require("wezterm")
+local ram = require("ram")
 local config = wezterm.config_builder()
+local act = wezterm.action
+local nerdfonts = wezterm.nerdfonts
 
+-- config.color_scheme = "Catppuccin Mocha"
 config.color_scheme = "Catppuccin Mocha"
 
 -- ==========================================
@@ -22,16 +26,33 @@ config.launch_menu = {
 	},
 }
 
+config.wsl_domains = {
+	{
+		name = "WSL:NixOS",
+		distribution = "NixOS",
+		username = "lin",
+		default_cwd = "~",
+		default_prog = { "zsh" },
+	},
+}
+
 -- ==========================================
 -- 2. 界面与外观优化
 -- ==========================================
 config.font = wezterm.font_with_fallback({
-	"JetBrains Mono",
+	"JetBrainsMono Nerd Font Mono",
 	"Consolas",
 	"Microsoft YaHei",
 })
+
+config.window_padding = {
+	left = 30,
+	right = 30,
+	top = 10,
+	bottom = 10,
+}
+
 config.font_size = 14.0
-config.color_scheme = "Catppuccin Mocha"
 
 -- Windows 11/10 磨砂玻璃效果
 config.win32_system_backdrop = "Acrylic"
@@ -39,7 +60,98 @@ config.window_background_opacity = 1.0
 -- 隐藏标题栏（仅保留调整大小的边框）
 -- config.window_decorations = "RESIZE"
 config.default_cursor_style = "BlinkingUnderline"
+config.window_decorations = "RESIZE"
+config.show_new_tab_button_in_tab_bar = false -- 隐藏添加标签的 "+" 按钮
+config.use_fancy_tab_bar = false -- 关闭原生花哨样式，使用自定义文本样式
 
+local colors = wezterm.color.get_builtin_schemes()[config.color_scheme]
+
+-- 2. 定义图标常量（使用 Nerd Font 字符）
+local ICON_WSL = wezterm.nerdfonts.linux_nixos or "󱄅"
+local ICON_WIN = wezterm.nerdfonts.custom_windows or ""
+local SPLIT_ICONS = { "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹", "¹⁰" }
+
+-- 3. 动态判断并格式化标签标题
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+	local pane = tab.active_pane
+	local icon = ICON_WIN
+	local title_text = ""
+	local tab_panes = tab.panes -- 获取当前 Tab 的所有分屏列表
+	local panes_size = #tab_panes -- 计算当前 Tab 的分屏总数
+	local split_icon = ""
+	local tab_index = tab.tab_index
+
+	if panes_size > 1 then
+		split_icon = SPLIT_ICONS[panes_size - 1]
+	end
+	-------------------------------------------------------------
+	-- 优先检测用户是否手动修改了 Tab 标题
+	-------------------------------------------------------------
+	local is_wsl_process = pane.foreground_process_name and string.match(pane.foreground_process_name, "wsl")
+	if tab.tab_title and #tab.tab_title > 0 then
+		if is_wsl_process then
+			icon = ICON_WSL
+		end
+		title_text = tab.tab_title
+	else
+		-------------------------------------------------------------
+		-- 用户未手动修改标题时，自动推断标题
+		-------------------------------------------------------------
+		title_text = string.gsub(pane.title, "%.exe", "")
+		if is_wsl_process then
+			icon = ICON_WSL
+			if string.match(title_text, "wsl.-") or title_text == "wsl" then
+				title_text = "WSL"
+			end
+		end
+	end
+
+	-------------------------------------------------------------
+	-- 4. 拼接最终显示的标签文本格式
+	local final_title = string.format(" %s%s %s.%s ", icon, split_icon, tab_index + 1, title_text)
+	-- 5. 根据是否是当前活跃标签，返回不同的样式
+	if tab.is_active then
+		return {
+			{ Attribute = { Intensity = "Bold" } },
+			{ Text = final_title },
+		}
+	end
+	return {
+		{ Text = final_title },
+	}
+end)
+
+-- arg1 window arg2 pane
+wezterm.on("update-status", function(window, _)
+	local name = window:active_key_table()
+	local mode = ""
+	if name then
+		if name == "copy_mode" then
+			mode = "Copy"
+		elseif name == "resize_pane" then
+			mode = "Resize"
+		end
+	else
+		mode = "Normal"
+	end
+	mode = string.format(" %s %s ", nerdfonts.fa_flag, mode)
+	window:set_left_status(wezterm.format({
+		{ Background = { Color = colors.ansi[5] } },
+		{ Foreground = { Color = colors.ansi[1] } },
+		{ Text = mode },
+		{ Background = { Color = colors.background } },
+		{ Text = " " },
+	}))
+
+	local mem = string.format("  %s", ram:update(ram.default_opts))
+	window:set_right_status(wezterm.format({
+		{ Background = { Color = colors.ansi[5] } },
+		{ Foreground = { Color = colors.ansi[1] } },
+		{
+			Text = mem,
+		},
+	}))
+end)
 -- ==========================================
 -- 快捷键配置 (快速新建与分屏)
 -- ==========================================
@@ -48,10 +160,9 @@ config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
 	-- CTRL + SHIFT + t : 快速打开下拉菜单选择终端
 	{ key = "t", mods = "LEADER", action = wezterm.action.ShowLauncher },
-	-- Alt + d : 水平分屏 (默认复制当前运行的 Shell)
-	{ key = "%", mods = "CTRL|SHIFT", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-	-- Alt + Shift + d : 垂直分屏
-	{ key = '"', mods = "CTRL|SHIFT", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	-- 分屏 (默认复制当前运行的 Shell)
+	{ key = "%", mods = "LEADER|SHIFT", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ key = '"', mods = "LEADER|SHIFT", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
 
 	-- 切换面板
 	{ key = "h", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Left") },
@@ -80,10 +191,18 @@ config.keys = {
 	{ key = "Enter", mods = "LEADER", action = wezterm.action.ActivateCopyMode },
 	{ key = "z", mods = "LEADER", action = wezterm.action.TogglePaneZoomState },
 	{ key = "r", mods = "CTRL|SHIFT", action = wezterm.action.ReloadConfiguration },
-	{ key = "w", mods = "CTRL|SHIFT", action = wezterm.action.CloseCurrentTab{confirm=true} },
+	{ key = "w", mods = "CTRL|SHIFT", action = wezterm.action.CloseCurrentTab({ confirm = true }) },
+	{
+		key = "r",
+		mods = "LEADER",
+		action = act.ActivateKeyTable({
+			name = "resize_pane",
+			one_shot = false,
+		}),
+	},
 
 	{
-		key = "n",
+		key = ",",
 		mods = "LEADER",
 		action = wezterm.action.PromptInputLine({
 			description = "Enter new tab title:",
@@ -108,81 +227,18 @@ config.keys = {
 	},
 }
 
-local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
-
-tabline.setup({
-	options = {
-		icons_enabled = true,
-		theme = "Catppuccin Mocha",
-		tabs_enabled = true,
-		theme_overrides = {},
-		section_separators = {
-			left = wezterm.nerdfonts.pl_left_hard_divider,
-			right = wezterm.nerdfonts.pl_right_hard_divider,
-		},
-		component_separators = {
-			left = wezterm.nerdfonts.pl_left_soft_divider,
-			right = wezterm.nerdfonts.pl_right_soft_divider,
-		},
-		tab_separators = {
-			left = wezterm.nerdfonts.pl_left_hard_divider,
-			right = wezterm.nerdfonts.pl_right_hard_divider,
-		},
+config.key_tables = {
+	resize_pane = {
+		{ key = "LeftArrow", action = act.AdjustPaneSize({ "Left", 1 }) },
+		{ key = "h", action = act.AdjustPaneSize({ "Left", 1 }) },
+		{ key = "RightArrow", action = act.AdjustPaneSize({ "Right", 1 }) },
+		{ key = "l", action = act.AdjustPaneSize({ "Right", 1 }) },
+		{ key = "UpArrow", action = act.AdjustPaneSize({ "Up", 1 }) },
+		{ key = "k", action = act.AdjustPaneSize({ "Up", 1 }) },
+		{ key = "DownArrow", action = act.AdjustPaneSize({ "Down", 1 }) },
+		{ key = "j", action = act.AdjustPaneSize({ "Down", 1 }) },
+		{ key = "Escape", action = "PopKeyTable" },
 	},
-	sections = {
-		tabline_a = { "mode" },
-		tabline_b = { "workspace" },
-		tabline_c = { " " },
-		tab_active = {
-			{
-				"process",
-				process_to_icon = {
-					["air"] = { wezterm.nerdfonts.md_language_go },
-					["bacon"] = { wezterm.nerdfonts.dev_rust },
-					["bat"] = { wezterm.nerdfonts.md_bat },
-					["btm"] = { wezterm.nerdfonts.md_chart_donut_variant },
-					["btop"] = { wezterm.nerdfonts.md_chart_areaspline },
-					["bun"] = { wezterm.nerdfonts.md_hamburger },
-					["cargo"] = { wezterm.nerdfonts.dev_rust },
-					["cmd.exe"] = { wezterm.nerdfonts.md_console_line },
-					["curl"] = wezterm.nerdfonts.md_flattr,
-					["debug"] = { wezterm.nerdfonts.cod_debug },
-					["default"] = wezterm.nerdfonts.md_application,
-					["docker"] = { wezterm.nerdfonts.md_docker },
-					["docker-compose"] = { wezterm.nerdfonts.md_docker },
-					["dpkg"] = { wezterm.nerdfonts.dev_debian },
-					["fish"] = { wezterm.nerdfonts.md_fish },
-					["git"] = { wezterm.nerdfonts.dev_git },
-					["go"] = { wezterm.nerdfonts.md_language_go },
-					["kubectl"] = { wezterm.nerdfonts.md_docker },
-					["kuberlr"] = { wezterm.nerdfonts.md_docker },
-					["lazygit"] = { wezterm.nerdfonts.cod_github },
-					["lua"] = { wezterm.nerdfonts.seti_lua },
-					["make"] = wezterm.nerdfonts.seti_makefile,
-					["nix"] = { wezterm.nerdfonts.linux_nixos },
-					["wslhost.exe"] = { wezterm.nerdfonts.linux_nixos },
-					["node"] = { wezterm.nerdfonts.md_nodejs },
-					["npm"] = { wezterm.nerdfonts.md_npm },
-					["nvim"] = { wezterm.nerdfonts.custom_neovim },
-					-- and more...
-				},
-				-- process_to_icon is a table that maps process to icons
-			},
-		},
-		-- tab_inactive = { "index", { "process", padding = { left = 0, right = 1 } } },
-		-- tabline_x = { "ram", "cpu" },
-		-- tabline_y = { "datetime", "battery" },
-		tabline_z = { "domain" },
-	},
-	extensions = {},
-})
-
-tabline.apply_to_config(config)
-config.window_padding = {
-	left = 20,
-	right = 20,
-	top = 10,
-	bottom = 0,
 }
 
 return config
